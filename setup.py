@@ -19,7 +19,7 @@ with pathlib.Path('requirements.txt').open() as requirements_txt:
 
     setuptools.setup(
         install_requires=install_requires,
-    )`
+    )
     
 
 
