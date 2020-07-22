@@ -5,13 +5,23 @@ import uuid
 
 from setuptools import setup, find_packages
 
-try:  # for pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError:  # for pip <= 9.0.3
-    from pip.req import parse_requirements
+import pathlib
 
-install_requirements = parse_requirements('requirements.txt', session=uuid.uuid1())
-requirements = [str(req.req) for req in install_requirements]
+import pkg_resources
+import setuptools
+
+with pathlib.Path('requirements.txt').open() as requirements_txt:
+    install_requires = [
+        str(requirement)
+        for requirement
+        in pkg_resources.parse_requirements(requirements_txt)
+    ]
+
+    setuptools.setup(
+        install_requires=install_requires,
+    )`
+    
+
 
 setup(
     name="python-unsplash",
